@@ -1,9 +1,13 @@
-.light {
+:root {
     --background-color: #f4f9f9;
-    --text-color: #aaaaaa
+    --text-color: #393939;
+    --toggle-off-color: grey;
+    --toggle-on-color: rgb(82, 186, 245);
 }
 
 .dark {
     --background-color: rgb(1, 3, 46);
-
+    --text-color: #aaaaaa;
+    --toggle-off-color: grey;
+    --toggle-on-color: pink;
 }

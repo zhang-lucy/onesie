@@ -6,8 +6,8 @@ RELATIVE_DIR = "../imgs"
 OUTPUT_FILE = "./src/pages/Main.js"
 
 lines = []
-img_vals = sorted(["img_" + img[:-4] for img in os.listdir(IMGS_DIR)])
-print("[" + ", ".join(img_vals) + "]")
+img_vals = sorted(["\"" + img[:-4] + "\": img_" + img[:-4] for img in os.listdir(IMGS_DIR) if img[-4:]==".png"])
+print("{" + ", ".join(img_vals) + "}")
 # img_paths = sorted(["import img_" + file[:-4] + " from \"" + os.path.join(RELATIVE_DIR, file) + "\";\n" for file in os.listdir(IMGS_DIR)])
 # for i in img_paths:
 #     if ".png" in i:

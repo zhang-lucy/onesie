@@ -1,9 +1,44 @@
 .Main-galleryImage {
-    width: 100px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.Main-galleryImage {
+.Main-galleryImageContainer {
+    width: 300px;
+    /* flex: 0 0 auto; */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Main-galleryImageCaption {
+    font-size: medium;
+}
+
+.Main-gallery {
     display: flex;
     flex-flow: row wrap;
     width: 60vw;
+    margin: 0;
+    padding: 0;
+}
+
+.Main-sidebar {
+    width: 200px;
+}
+
+.Main-toggleCaption {
+    font-size: medium;
+}
+
+.Main-sidebarSection {
+    padding: 10px;
+}
+
+.Main {
+    display: flex;
+    flex-direction: row nowrap;
+
 }
