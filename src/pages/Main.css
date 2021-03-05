@@ -1,0 +1,9 @@
+.Main-galleryImage {
+    width: 100px;
+}
+
+.Main-galleryImage {
+    display: flex;
+    flex-flow: row wrap;
+    width: 60vw;
+}
