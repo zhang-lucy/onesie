@@ -140,7 +140,8 @@ class Main extends Component {
     constructor(props) {
         super(props);
         console.log(Object.keys(NAMES));
-        this.DEFAULT_TOGGLE = true
+        this.DEFAULT_TOGGLE = true;
+        this.DEFAULT_EXACT_MATCH = false;
         let sizeToggles = [];
         for (let i = 0; i < 8; i++) {
             sizeToggles.push(this.DEFAULT_TOGGLE)
@@ -150,6 +151,7 @@ class Main extends Component {
             sidebarOpen: true,
             toggles: {"1z": this.DEFAULT_TOGGLE, "2z": this.DEFAULT_TOGGLE, "3z": this.DEFAULT_TOGGLE, "4z": this.DEFAULT_TOGGLE, "5z": this.DEFAULT_TOGGLE, "6z": this.DEFAULT_TOGGLE, "7z": this.DEFAULT_TOGGLE},
             sizeToggles: sizeToggles,
+            exactMatchToggle: false,
         }
  
         this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
@@ -172,12 +174,18 @@ class Main extends Component {
     }
 
     onToggleChange(val) {
-        if (val.length > 1) {
+        if (val == "exact") {
+            this.setState({
+                exactMatchToggle: !this.state.exactMatchToggle
+            });
+        } else if (val.length > 1) {
             const newToggles = {...this.state.toggles};
             newToggles[val] = !newToggles[val];
             this.setState({toggles:newToggles});
         } else {
-
+            // const newToggles = {...this.state.toggles};
+            // newToggles[val] = !newToggles[val];
+            // this.setState({toggles:newToggles});
         }
         
     }
@@ -185,12 +193,26 @@ class Main extends Component {
     getFilteredImages() {
         console.log(this.state.toggles);
         return Object.keys(IMGS).filter(img => {
-            for (let name of Object.keys(this.state.toggles)) {
-                if (this.state.toggles[name] && img.includes(name)) {
-                    return true;
+            if (this.state.exactMatchToggle) {
+                for (let name of Object.keys(this.state.toggles)) {
+                    if (!(this.state.toggles[name] === img.includes(name))) {
+                        return false;
+                    }
                 }
+                return true;
+            } else {
+                for (let name of Object.keys(this.state.toggles)) {
+                    if (this.state.toggles[name]) {
+                        if (!img.includes(name)) {
+                            return false;
+                        }
+                    }
+                    // if (!(this.state.toggles[name] && img.includes(name))) {
+                    //     return false;
+                    // }
+                }
+                return true;
             }
-            return false;
         });
     }
 
@@ -199,40 +221,51 @@ class Main extends Component {
         return (
             <>
                 <div className="Main">
-                        <Sidebar 
-                            className="Main-sidebar"
-                            sidebar={
-                                <>
-                                <div className="Main-sidebar">
-                                    <b>Names</b>
-                                    <div className="Main-sidebarSection">
-                                        {Object.keys(NAMES).map((key, index) => (
-                                            <div className="Main-toggleCaption">
-                                                {NAMES[key]}
-                                                <ToggleButton 
-                                                    onChange={()=>{this.onToggleChange(key)}}
-                                                    defaultChecked={this.DEFAULT_TOGGLE}
-                                                />
-                                            </div>))}
-                                    </div>
-                                    <b>Group Size</b>
-                                    <div className="Main-sidebarSection">
-                                        {[0,1,2,3,4,5,6,7].map((_, index) => (
-                                            <div className="Main-toggleCaption">
-                                                {index}
-                                                <ToggleButton 
-                                                    onChange={()=>{this.onToggleChange(index)}}
-                                                    defaultChecked={this.DEFAULT_TOGGLE}
-                                                />
-                                            </div>))}
+                    <div className="Main-header">onesie</div>
+                    <Sidebar 
+                        className="Main-sidebar"
+                        sidebar={
+                            <>
+                            <div className="Main-sidebar">
+                                <b>Names</b>
+                                <div className="Main-sidebarSection">
+                                    {Object.keys(NAMES).map((key, index) => (
+                                        <div className="Main-toggleCaption">
+                                            {NAMES[key]}
+                                            <ToggleButton 
+                                                onChange={()=>{this.onToggleChange(key)}}
+                                                defaultChecked={this.DEFAULT_TOGGLE}
+                                            />
+                                        </div>))}
+                                </div>
+                                <div className="Main-sidebarSection">
+                                    <div className="Main-toggleCaption">
+                                        Exact match
+                                        <ToggleButton 
+                                            onChange={()=>{this.onToggleChange("exact")}}
+                                            defaultChecked={this.DEFAULT_EXACT_MATCH}
+                                        />
                                     </div>
                                 </div>
-                                </>
-                            }
-                            open={this.state.sidebarOpen}
-                            onSetOpen={this.onSetSidebarOpen}
-                            docked={this.state.sidebarDocked}
-                        />
+
+                                <b>Group Size</b>
+                                <div className="Main-sidebarSection">
+                                    {[0,1,2,3,4,5,6,7].map((_, index) => (
+                                        <div className="Main-toggleCaption">
+                                            {index}
+                                            <ToggleButton 
+                                                onChange={()=>{this.onToggleChange(index)}}
+                                                defaultChecked={this.DEFAULT_TOGGLE}
+                                            />
+                                        </div>))}
+                                </div>
+                            </div>
+                            </>
+                        }
+                        open={this.state.sidebarOpen}
+                        onSetOpen={this.onSetSidebarOpen}
+                        docked={this.state.sidebarDocked}
+                    />
                     <div className="Main-gallery">
                         {images.map((key, index) => (
                             <div className="Main-galleryImageContainer">
