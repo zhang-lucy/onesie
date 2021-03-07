@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/onesie/static/css/main.6fe3ada7.chunk.css",
-    "main.js": "/onesie/static/js/main.0e651a29.chunk.js",
-    "main.js.map": "/onesie/static/js/main.0e651a29.chunk.js.map",
+    "main.js": "/onesie/static/js/main.0cacc592.chunk.js",
+    "main.js.map": "/onesie/static/js/main.0cacc592.chunk.js.map",
     "runtime-main.js": "/onesie/static/js/runtime-main.cb9dc9ea.js",
     "runtime-main.js.map": "/onesie/static/js/runtime-main.cb9dc9ea.js.map",
     "static/js/2.26cfb5ba.chunk.js": "/onesie/static/js/2.26cfb5ba.chunk.js",
@@ -145,6 +145,6 @@
     "static/js/runtime-main.cb9dc9ea.js",
     "static/js/2.26cfb5ba.chunk.js",
     "static/css/main.6fe3ada7.chunk.css",
-    "static/js/main.0e651a29.chunk.js"
+    "static/js/main.0cacc592.chunk.js"
   ]
 }
